@@ -1,7 +1,16 @@
+### Nice trick!
 puts "\e[H\e[2J"
 
+### And, good job using a Class instead of a Hash.
 class Person
 	attr_accessor :first_name, :last_name, :phone, :email
+
+  ### Thought: since you're using a Class instead of a Hash,
+  ###          you can define some methods to make the rest
+  ###          of your code easier.  Some examples:
+  ###
+  ###            * full_name:      --> "Bob Dole"
+  ###            * last_first:     --> "Dole, Bob"
 end
 
 def new(book)
@@ -27,6 +36,9 @@ def view(book)
 	list(book)
 	print "View? "
 	num = gets.chomp.to_i
+
+  ### TODO: What if the user specifies an invalid index?
+  ### TODO: What if the user specifies a negative index?
 	
 	print "First Name: "
 	puts book[num].first_name
@@ -50,6 +62,10 @@ def delete(book)
 	list(book)
 	print "\nDelete? "
 	num = gets.chomp.to_i
+
+  ### TODO: What if the user specifies an invalid index?
+  ### TODO: What if the user specifies a negative index?
+
 	puts "\nDeleted #{book[num].first_name} #{book[num].last_name}!\n\n"
 	book.delete_at(num)
 	else
@@ -70,6 +86,9 @@ end
 book = []
 menu = 4
 
+
+### Nice job at recognizing that this form of the "while"
+### loop was a better match for the desired main menu behavior.
 begin
 	puts "-+-+-+-Menu-+-+-+-"
 	puts "0 - Create new entry"
@@ -86,6 +105,15 @@ begin
 		delete(book)
 	elsif menu == 3
 		puts "\nQuitting application…\n\n"
+
+    ### Note: This 'break' statement is actually unnecessary
+    ###       since your loop will exit in a few lines anyway.
+    ###       Alternatively, you can create an 'infinite' loop
+    ###       like this:
+    ###
+    ###         loop do
+    ###           # body
+    ###         end
 		break
 	else
 		puts "\nStop wasting time!\n\n"
